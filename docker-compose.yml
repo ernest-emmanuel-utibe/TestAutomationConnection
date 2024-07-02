@@ -1,3 +1,71 @@
+# version: '3.8'
+
+# services:
+#   app:
+#     build:
+#       context: .
+#       dockerfile: Dockerfile
+#     ports:
+#       - "8080:8080"
+#     depends_on:
+#       - db
+#       - keycloak
+#     environment:
+#       SPRING_DATA_MONGODB_URI: mongodb://db:27017/testdb
+#       KEYCLOAK_AUTH_SERVER_URL: http://keycloak:8080/auth
+#       KEYCLOAK_REALM: your-realm
+#       KEYCLOAK_RESOURCE: your-client-id
+#       KEYCLOAK_CREDENTIALS_SECRET: your-client-secret
+#     networks:
+#       - app-network
+
+#   db:
+#     image: mongo:latest
+#     ports:
+#       - "27017:27017"
+#     networks:
+#       - app-network
+#     volumes:
+#       - mongo-data:/data/db
+
+#   keycloak:
+#     image: quay.io/keycloak/keycloak:latest
+#     environment:
+#       KEYCLOAK_USER: admin
+#       KEYCLOAK_PASSWORD: admin
+#       DB_VENDOR: h2
+#     ports:
+#       - "8081:8080"
+#     networks:
+#       - app-network
+
+#   jenkins:
+#     image: jenkins/jenkins:lts
+#     ports:
+#       - "8082:8080"
+#       - "50000:50000"
+#     volumes:
+#       - jenkins-data:/var/jenkins_home
+#     networks:
+#       - app-network
+
+# networks:
+#   app-network:
+#     driver: bridge
+
+# volumes:
+#   mongo-data:
+#   jenkins-data:
+
+
+
+
+
+
+
+
+
+
 version: '3.8'
 
 services:
@@ -10,12 +78,16 @@ services:
     depends_on:
       - db
       - keycloak
+      - postgres
     environment:
       SPRING_DATA_MONGODB_URI: mongodb://db:27017/testdb
       KEYCLOAK_AUTH_SERVER_URL: http://keycloak:8080/auth
       KEYCLOAK_REALM: your-realm
       KEYCLOAK_RESOURCE: your-client-id
       KEYCLOAK_CREDENTIALS_SECRET: your-client-secret
+      POSTGRES_DB_URL: jdbc:postgresql://postgres:5432/mydb
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypassword
     networks:
       - app-network
 
@@ -39,13 +111,19 @@ services:
     networks:
       - app-network
 
-  jenkins:
-    image: jenkins/jenkins:lts
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypassword
+      POSTGRES_DB: mydb
     ports:
-      - "8082:8080"
-      - "50000:50000"
-    volumes:
-      - jenkins-data:/var/jenkins_home
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     networks:
       - app-network
 
