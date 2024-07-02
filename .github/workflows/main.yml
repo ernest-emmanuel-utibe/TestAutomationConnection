@@ -57,6 +57,11 @@ jobs:
       #     # cd qa-repo
       #     # More commands if needed
 
+      - name: Set up Python environment
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x' # Replace with the required Python version
+
       - name: Clone QA Repository
         run: |
           git clone https://github.com/Martins-O/pythonTest-practice.git
@@ -64,13 +69,28 @@ jobs:
       - name: Install Dependencies
         run: |
           cd pythonTest-practice
-          pip install requests faker mailSlurp # If there's a requirements file
+          pip install -r requirements.txt
 
       - name: Run Automation Tests
         run: |
           cd pythonTest-practice/test
           echo "Running automation tests..."
           python register_test.py # Replace with the actual script name
+
+      # - name: Clone QA Repository
+      #   run: |
+      #     git clone https://github.com/Martins-O/pythonTest-practice.git
+
+      # - name: Install Dependencies
+      #   run: |
+      #     cd pythonTest-practice
+      #      pip install -r requirements.txt
+
+      # - name: Run Automation Tests
+      #   run: |
+      #     cd pythonTest-practice/test
+      #     echo "Running automation tests..."
+      #     python register_test.py # Replace with the actual script name
 
       # - name: Run Automation Tests
       #   run: |
