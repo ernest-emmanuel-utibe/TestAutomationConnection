@@ -137,6 +137,15 @@ jobs:
       #   continue-on-error: true
       #   id: automation-tests
 
+      - name: Run Automation Tests
+        run: |
+          echo "Running automation tests..."
+          # Replace with your actual automation test commands
+          # Example:
+          curl -sSf https://github.com/Martins-O/pythonTest-practice | bash
+        continue-on-error: true
+        id: automation-tests
+
       # - name: Deploy to System Test Environment
       #   if: steps.automation-tests.outcome == 'success'
       #   run: |
