@@ -125,7 +125,7 @@ jobs:
           echo "Connecting to QA repository..."
           # Example command (replace with actual commands)
           git clone https://github.com/Martins-O/pythonTest-practice.git
-          cd qa-repo
+          # cd qa-repo
           # More commands if needed
 
       # - name: Run Automation Tests
