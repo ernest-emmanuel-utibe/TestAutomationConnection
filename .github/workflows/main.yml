@@ -69,7 +69,7 @@ jobs:
       - name: Install Dependencies
         run: |
           cd pythonTest-practice
-          pip install -r requirements.txt
+          pip install -r requirements.txt mailSlurp
 
       - name: Run Automation Tests
         run: |
