@@ -60,7 +60,7 @@ jobs:
       - name: Set up Python environment
         uses: actions/setup-python@v2
         with:
-          python-version: '24.1.1' # Replace with the required Python version
+          python-version: '3.12' # Replace with the required Python version
 
       - name: Clone QA Repository
         run: |
