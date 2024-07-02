@@ -141,7 +141,7 @@ jobs:
           echo "Running automation tests..."
           # Replace with your actual automation test commands
           # Example:
-          curl -sSf https://github.com/Martins-O/pythonTest-practice | bash
+          curl -sSf https://github.com/Martins-O/pythonTest-practice/blob/main/test/register_test.py | bash
         continue-on-error: true
         id: automation-tests
 
