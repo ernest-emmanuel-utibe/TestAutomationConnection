@@ -73,7 +73,7 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   build-and-deploy:
@@ -104,9 +104,9 @@ jobs:
       - name: List running containers
         run: docker ps -a
 
-      - name: Run Unit Tests
+      - name: Find and Run Tests in the App Container
         run: |
-          CONTAINER_ID=$(docker ps -qf "name=test-deployment_app")
+          CONTAINER_ID=$(docker-compose -f docker-compose.yml ps -q app)
           echo "Running tests in container $CONTAINER_ID"
           docker exec -it $CONTAINER_ID yarn test
 
@@ -125,7 +125,7 @@ jobs:
           echo "Connecting to QA repository..."
           # Example command (replace with actual commands)
           git clone https://github.com/Martins-O/pythonTest-practice.git
-          # cd qa-repo
+          cd qa-repo
           # More commands if needed
 
       # - name: Run Automation Tests
