@@ -123,8 +123,7 @@ jobs:
         run: |
           # Add your commands to connect to the QA repository here
           echo "Connecting to QA repository..."
-          # Example command (replace with actual commands)
-          git clone https://github.com/Martins-O/pythonTest-practice.git
+          https://github.com/Martins-O/pythonTest-practice/blob/main/test/register_test.py
           # cd qa-repo
           # More commands if needed
 
