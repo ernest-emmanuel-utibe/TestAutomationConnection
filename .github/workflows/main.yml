@@ -79,9 +79,10 @@ jobs:
 
       - name: Run Automation Tests
         run: |
-          cd pythonTest-practice/test
+          # cd pythonTest-practice/test
           echo "Running automation tests..."
-          python register_test.py # Replace with the actual script name   
+          pytest 
+      # Replace with the actual script name   
 
       # - name: Clone QA Repository
       #   run: |
