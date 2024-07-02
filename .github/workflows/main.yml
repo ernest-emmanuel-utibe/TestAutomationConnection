@@ -113,37 +113,37 @@ jobs:
       - name: Push Docker images to DockerHub
         run: docker-compose -f docker-compose.yml push
 
-      - name: Deploy to Development Environment
-        run: kubectl apply -f k8s/deployment-dev.yaml --context ${{ secrets.DEV_ENV }}
+      # - name: Deploy to Development Environment
+      #   run: kubectl apply -f k8s/deployment-dev.yaml --context ${{ secrets.DEV_ENV }}
 
-      - name: Create SNS Topic
-        run: aws sns create-topic --name ${{ secrets.SNS_TOPIC_NAME }} --region ${{ secrets.AWS_REGION }}
+      # - name: Create SNS Topic
+      #   run: aws sns create-topic --name ${{ secrets.SNS_TOPIC_NAME }} --region ${{ secrets.AWS_REGION }}
 
       - name: Connect to QA Repository
         run: |
           # Add your commands to connect to the QA repository here
           echo "Connecting to QA repository..."
           # Example command (replace with actual commands)
-          git clone https://github.com/your-org/qa-repo.git
-          cd qa-repo
+          git clone https://github.com/Martins-O/pythonTest-practice.git
+          # cd qa-repo
           # More commands if needed
 
-      - name: Run Automation Tests
-        run: |
-          # Add your automation test commands here
-          echo "Running automation tests..."
-          # Example command (replace with actual commands)
-          ./run-tests.sh
-        continue-on-error: true
-        id: automation-tests
+      # - name: Run Automation Tests
+      #   run: |
+      #     # Add your automation test commands here
+      #     echo "Running automation tests..."
+      #     # Example command (replace with actual commands)
+      #     ./run-tests.sh
+      #   continue-on-error: true
+      #   id: automation-tests
 
-      - name: Deploy to System Test Environment
-        if: steps.automation-tests.outcome == 'success'
-        run: |
-          # Add your commands to deploy to the system test environment here
-          echo "Deploying to system test environment..."
-          # Example command (replace with actual commands)
-          kubectl apply -f k8s/deployment-systest.yaml --context ${{ secrets.SYSTEST_ENV }}
+      # - name: Deploy to System Test Environment
+      #   if: steps.automation-tests.outcome == 'success'
+      #   run: |
+      #     # Add your commands to deploy to the system test environment here
+      #     echo "Deploying to system test environment..."
+      #     # Example command (replace with actual commands)
+      #     kubectl apply -f k8s/deployment-systest.yaml --context ${{ secrets.SYSTEST_ENV }}
 
       - name: Send email on success
         if: steps.automation-tests.outcome == 'success'
