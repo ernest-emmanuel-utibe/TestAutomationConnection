@@ -66,16 +66,22 @@ jobs:
         run: |
           git clone https://github.com/Martins-O/pythonTest-practice.git
 
-      - name: Install Dependencies
+      # - name: Install Dependencies
+      #   run: |
+      #     cd pythonTest-practice
+      #     pip install -r requirements.txt mailSlurp
+
+      - name: Install dependencies
         run: |
-          cd pythonTest-practice
-          pip install -r requirements.txt mailSlurp
+          python -m venv venv
+          source venv/bin/activate
+          pip install -r requirements.txt
 
       - name: Run Automation Tests
         run: |
           cd pythonTest-practice/test
           echo "Running automation tests..."
-          python register_test.py # Replace with the actual script name
+          python register_test.py # Replace with the actual script name   
 
       # - name: Clone QA Repository
       #   run: |
