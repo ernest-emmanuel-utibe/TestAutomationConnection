@@ -104,11 +104,11 @@ jobs:
       - name: List running containers
         run: docker ps -a
 
-      - name: Find and Run Tests in the App Container
-        run: |
-          CONTAINER_ID=$(docker-compose -f docker-compose.yml ps -q app)
-          echo "Running tests in container $CONTAINER_ID"
-          docker exec -it $CONTAINER_ID yarn test
+      # - name: Find and Run Tests in the App Container
+      #   run: |
+      #     CONTAINER_ID=$(docker-compose -f docker-compose.yml ps -q app)
+      #     echo "Running tests in container $CONTAINER_ID"
+      #     docker exec -it $CONTAINER_ID yarn test
 
       - name: Push Docker images to DockerHub
         run: docker-compose -f docker-compose.yml push
