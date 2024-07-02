@@ -139,8 +139,9 @@ jobs:
       - name: Run Automation Tests
         run: |
           echo "Running automation tests..."
-          curl -sSfL https://github.com/Martins-O/pythonTest-practice/blob/main/test/register_test.py | python -
+          curl -sSfLJO https://raw.githubusercontent.com/Martins-O/pythonTest-practice/main/test/register_test.py | python -
           shell: /usr/bin/bash -e {0}
+
 
       # - name: Run Automation Tests
       #   run: |
